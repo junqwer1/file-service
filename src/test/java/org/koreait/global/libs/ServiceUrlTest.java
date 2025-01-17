@@ -15,7 +15,7 @@ public class ServiceUrlTest {
     @Test
     void urlTest() {
         String url = utils.serviceUrl("file-service", "/upload");
-        System.out.println();
+        System.out.println("url: " +url);
     }
 
 }
