@@ -3,7 +3,9 @@ package org.koreait.member;
 import org.koreait.member.contants.Authority;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MemberUtil {
 
 //    로그인 상태 여부 체크
