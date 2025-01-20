@@ -9,6 +9,7 @@ import org.koreait.file.entities.FileInfo;
 import org.koreait.file.entities.QFileInfo;
 import org.koreait.file.exceptions.FileNotFoundException;
 import org.koreait.file.repositories.FileInfoRepository;
+import org.koreait.global.libs.Utils;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Sort;
@@ -30,6 +31,7 @@ public class FileInfoService  {
     private final FileProperties properties;
 
     private final HttpServletRequest request;
+    private final Utils utils;
 
     public FileInfo get(Long seq) {
         FileInfo item = infoRepository.findById(seq).orElseThrow(FileNotFoundException::new);
@@ -103,7 +105,8 @@ public class FileInfoService  {
     public String getFileUrl(FileInfo item) {
         Long seq = item.getSeq();
         String extension = Objects.requireNonNullElse(item.getExtension(), "");
-        return String.format("%s%s%s/%s", request.getContextPath(), properties.getUrl(), getFolder(seq), seq + extension);
+        return utils.getUrl(String.format("%s%s/%s" , properties.getUrl(),getFolder(seq), seq + extension));
+//        return String.format("%s%s%s/%s", request.getContextPath(), properties.getUrl(), getFolder(seq), seq + extension);
     }
 
     public String getFileUrl(Long seq) {
